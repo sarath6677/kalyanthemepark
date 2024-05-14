@@ -13,7 +13,13 @@ class VendorController extends Controller
      */
     public function index()
     {
-        //
+        // $vendors = Vendor::get();
+        // return view('vendor.index',compact('vendors'));
+
+        return view('vendor.index', [
+            'vendors' => Vendor::latest()->paginate(10)
+        ]);
+
     }
 
     /**
@@ -21,7 +27,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        //
+        return view('vendor.create');
     }
 
     /**
@@ -29,7 +35,11 @@ class VendorController extends Controller
      */
     public function store(StorevendorRequest $request)
     {
-        //
+
+        Vendor::create($request->all());
+        return redirect()->route('vendor.index')
+                ->withSuccess('New vendor is added successfully.');
+
     }
 
     /**
@@ -37,7 +47,10 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        //
+        return view('vendor.show', [
+            'vendor' => $vendor
+        ]);
+
     }
 
     /**
@@ -61,6 +74,8 @@ class VendorController extends Controller
      */
     public function destroy(Vendor $vendor)
     {
-        //
+        $vendor->delete();
+        return redirect()->route('vendor.index')
+                ->withSuccess('vendor is deleted successfully.');
     }
 }
