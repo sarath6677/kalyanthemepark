@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
+            $table->string('business_name');
+            $table->string('address');
+            $table->string('vendor_name');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
