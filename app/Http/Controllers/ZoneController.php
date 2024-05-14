@@ -13,7 +13,9 @@ class ZoneController extends Controller
      */
     public function index()
     {
-        //
+        $zones = Zone::get();
+
+        return view('zone.index',compact('zones'));
     }
 
     /**
@@ -21,7 +23,7 @@ class ZoneController extends Controller
      */
     public function create()
     {
-        //
+        return view('zone.create');
     }
 
     /**
@@ -29,7 +31,10 @@ class ZoneController extends Controller
      */
     public function store(StoreZoneRequest $request)
     {
-        //
+        Zone::create([
+            'zone_name' => $request->zone_name
+        ]);
+        return redirect()->route('zone.index');
     }
 
     /**
@@ -37,7 +42,7 @@ class ZoneController extends Controller
      */
     public function show(Zone $zone)
     {
-        //
+        return view('zone.show');
     }
 
     /**
@@ -45,7 +50,7 @@ class ZoneController extends Controller
      */
     public function edit(Zone $zone)
     {
-        //
+        return view('zone.edit');
     }
 
     /**
@@ -53,7 +58,7 @@ class ZoneController extends Controller
      */
     public function update(UpdateZoneRequest $request, Zone $zone)
     {
-        //
+        return redirect()->route('zone.index');
     }
 
     /**
@@ -61,6 +66,6 @@ class ZoneController extends Controller
      */
     public function destroy(Zone $zone)
     {
-        //
+        return redirect()->route('zone.index');
     }
 }
