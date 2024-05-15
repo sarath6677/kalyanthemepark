@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Vendor;
 use App\Http\Requests\StorevendorRequest;
 use App\Http\Requests\UpdatevendorRequest;
+use App\Models\VendorBank;
 
 class VendorController extends Controller
 {
@@ -36,7 +37,16 @@ class VendorController extends Controller
     public function store(StorevendorRequest $request)
     {
 
-        Vendor::create($request->all());
+        $vendor = Vendor::create($request->all());
+
+        VendorBank::create([
+            'vendor_id' => $vendor->id,
+            'account_no' => $request->account_no,
+            'bank_name' => $request->bank_name,
+            'ifsc_code' => $request->ifsc_code,
+            'branch' => $request->branch
+        ]);
+
         return redirect()->route('vendor.index')
                 ->withSuccess('New vendor is added successfully.');
 
@@ -47,8 +57,10 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
+        $VendorBank=VendorBank::where('vendor_id',$vendor->id)->first();
         return view('vendor.show', [
-            'vendor' => $vendor
+            'vendor' => $vendor,
+            'VendorBank'=>$VendorBank
         ]);
 
     }
