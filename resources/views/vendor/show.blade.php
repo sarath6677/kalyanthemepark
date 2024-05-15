@@ -45,6 +45,40 @@
                     </div>
 
             </div>
+
+            <div class="card-header">
+                <div class="float-start">
+                    Payment Details
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Account No:</strong></label>
+                <div class="col-md-6" style="line-height: 35px;">
+                    {{ $VendorBank->account_no ?? '-' }}
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Bank Name:</strong></label>
+                <div class="col-md-6" style="line-height: 35px;">
+                    {{ $VendorBank->bank_name ?? '-' }}
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>IFSC Code:</strong></label>
+                <div class="col-md-6" style="line-height: 35px;">
+                    {{ $VendorBank->ifsc_code ?? '-' }}
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Branch:</strong></label>
+                <div class="col-md-6" style="line-height: 35px;">
+                    {{ $VendorBank->branch ?? '-' }}
+                </div>
+            </div>
         </div>
     </div>
 </div>
