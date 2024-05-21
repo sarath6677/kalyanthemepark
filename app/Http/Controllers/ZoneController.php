@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Zone;
-use App\Http\Requests\StoreZoneRequest;
-use App\Http\Requests\UpdateZoneRequest;
+use App\Http\Requests\zone\StoreZoneRequest;
+use App\Http\Requests\zone\UpdateZoneRequest;
 
 class ZoneController extends Controller
 {
@@ -13,7 +13,7 @@ class ZoneController extends Controller
      */
     public function index()
     {
-        $zones = Zone::get();
+        $zones = Zone::latest()->paginate(10);
 
         return view('zone.index',compact('zones'));
     }
@@ -34,7 +34,7 @@ class ZoneController extends Controller
         Zone::create([
             'zone_name' => $request->zone_name
         ]);
-        return redirect()->route('zone.index');
+        return redirect()->route('zone');
     }
 
     /**
@@ -58,7 +58,7 @@ class ZoneController extends Controller
      */
     public function update(UpdateZoneRequest $request, Zone $zone)
     {
-        return redirect()->route('zone.index');
+        return redirect()->route('zone');
     }
 
     /**
@@ -66,6 +66,6 @@ class ZoneController extends Controller
      */
     public function destroy(Zone $zone)
     {
-        return redirect()->route('zone.index');
+        return redirect()->route('zone');
     }
 }

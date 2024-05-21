@@ -1,16 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ __('Zone') }} <a href="{{ route('zone.create') }}" class="btn btn-primary"><i class="fa fa-pencil">Create</i></a>
-                </div>
-
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
+<div class="card">
+    <div class="card-header">Users List</div>
+    <div class="card-body">
+            <a href="{{ route('zone.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add Zone</a>
+        <table class="table table-striped table-bordered">
+            <thead>
                             <tr>
                                 <th>S.No</th>
                                 <th>Zone Name</th>
@@ -35,9 +31,9 @@
                             @endforelse
                         </tbody>
                     </table>
+
+                    {{ $zones->links() }}
+
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+            @endsection

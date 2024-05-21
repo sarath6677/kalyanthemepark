@@ -6,7 +6,7 @@
         </span>
         <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">
             {{ __('Developed by')}}
-            <a class="text-dark" target="_blank" href="https://themicly.com">Themicly</a>
+            <a class="text-dark" target="_blank" href="#">Ascends Soft</a>
             </a>
             with <i class="fa fa-heart text-danger"></i>
         </span>

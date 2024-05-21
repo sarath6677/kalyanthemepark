@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customers;
-use App\Http\Requests\StoreCustomersRequest;
-use App\Http\Requests\UpdateCustomersRequest;
+use App\Http\Requests\user\StoreCustomersRequest;
+use App\Http\Requests\user\UpdateCustomersRequest;
 
 class CustomersController extends Controller
 {
@@ -13,7 +13,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers =  Customers::get();
+        $customers =  Customers::latest()->paginate(10);
 
         return view('users.index',compact('customers'));
     }
@@ -38,7 +38,7 @@ class CustomersController extends Controller
             'card_amount' => $request->card_amount,
         ]);
 
-        return redirect(route('user.index'));
+        return redirect(route('user'));
     }
 
     /**
@@ -62,7 +62,7 @@ class CustomersController extends Controller
      */
     public function update(UpdateCustomersRequest $request, Customers $customers)
     {
-        return redirect()->route('user.index');
+        return redirect()->route('user');
     }
 
     /**
@@ -71,6 +71,6 @@ class CustomersController extends Controller
     public function destroy(Customers $customers)
     {
 
-        return redirect()->route('user.index');
+        return redirect()->route('user');
     }
 }

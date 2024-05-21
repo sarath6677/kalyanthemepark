@@ -27,13 +27,13 @@
 		<div class="container ">
 			<div class="d-flex justify-content-between my-5">
 				<div>
-					<a href="https://themicly.com/products/ThemePark/">
+					<a href="#">
 		            	<img height="30" src="{{ asset('img/logo.png') }}">
 		            </a>
 				</div>
 				<div>
 					<a class="btn btn-success btn-rounded mr-3" href="{{url('login')}}/">Demo</a>
-					<a class="btn btn-warning btn-rounded" href="https://themicly.github.io/ThemePark-Laravel-Admin-Starter-Kit/">Documentation</a>
+					<a class="btn btn-warning btn-rounded" href="#">Documentation</a>
 				</div>
 			</div>
 	    	<div class="banner-text m-4 d-relative">
@@ -50,10 +50,10 @@
 		        <div class="my-5">
 		        	<p class="text-center">Need Help?</p>
 		        	<div class="card-body template-demo text-center">
-                        <a href="https://themicly.com" class="btn social-btn text-white btn-google"><i class="ik ik-globe"></i></a>
-                        <a href="https://github.com/themicly" class="btn social-btn text-white btn-facebook "><i class="fab fa-github"></i></a>
-                        <a href="https://twitter.com/themiclyBd" class="btn social-btn text-white btn-twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/in/rakibhstu/" class="btn social-btn text-white btn-linkedin"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="btn social-btn text-white btn-google"><i class="ik ik-globe"></i></a>
+                        <a href="#" class="btn social-btn text-white btn-facebook "><i class="fab fa-github"></i></a>
+                        <a href="#" class="btn social-btn text-white btn-twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn social-btn text-white btn-linkedin"><i class="fab fa-linkedin"></i></a>
                     </div>
 
 		        </div>
