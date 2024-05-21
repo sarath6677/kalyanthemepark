@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\VendorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Http\Controllers\PermissionController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/ 
+*/
 Route::get('/', function () { return view('home'); });
 
 
@@ -27,8 +28,8 @@ Route::get('login', [LoginController::class,'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class,'login']);
 Route::post('register', [RegisterController::class,'register']);
 
-Route::get('password/forget',  function () { 
-	return view('pages.forgot-password'); 
+Route::get('password/forget',  function () {
+	return view('pages.forgot-password');
 })->name('password.forget');
 Route::post('password/email', [ForgotPasswordController::class,'sendResetLinkEmail'])->name('password.email');
 Route::get('password/reset/{token}', [ResetPasswordController::class,'showResetForm'])->name('password.reset');
@@ -40,10 +41,18 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/logout', [LoginController::class,'logout']);
 	Route::get('/clear-cache', [HomeController::class,'clearCache']);
 
-	// dashboard route  
-	Route::get('/dashboard', function () { 
-		return view('pages.dashboard'); 
+	// dashboard route
+	Route::get('/dashboard', function () {
+		return view('pages.dashboard');
 	})->name('dashboard');
+
+    Route::get('/vendor', [VendorController::class,'index'])->name('vendor');
+    Route::get('/vendor/create', [VendorController::class,'create'])->name('vendor.create');
+    Route::post('/vendor/store', [VendorController::class,'store'])->name('vendor.store');
+    Route::get('/vendor/show/{id}', [VendorController::class,'show'])->name('vendor.show');
+    Route::get('/vendor/destroy/{id}', [VendorController::class,'destroy'])->name('vendor.destroy');
+
+    // Route::resources(['vendor' => VendorController::class]);
 
 	//only those have manage_user permission will get access
 	Route::group(['middleware' => 'can:manage_user'], function(){

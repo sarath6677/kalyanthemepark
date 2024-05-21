@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
 <div class="card">
@@ -25,7 +25,7 @@
                     <td>{{ $vendor->vendor_name }}</td>
                     <td>{{ $vendor->description }}</td>
                     <td>
-                        <form action="{{ route('vendor.destroy', $vendor->id) }}" method="post">
+                        <form action="{{ route('vendor.destroy', $vendor->id) }}" method="get">
                             @csrf
                             @method('DELETE')
 
