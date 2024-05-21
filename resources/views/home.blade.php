@@ -32,21 +32,21 @@
 		            </a>
 				</div>
 				<div>
-					<a class="btn btn-success btn-rounded mr-3" href="{{url('login')}}/">Demo</a>
-					<a class="btn btn-warning btn-rounded" href="#">Documentation</a>
+					<a class="btn btn-success btn-rounded mr-3" href="{{url('login')}}/">Login</a>
+					{{-- <a class="btn btn-warning btn-rounded" href="#">Documentation</a> --}}
 				</div>
 			</div>
 	    	<div class="banner-text m-4 d-relative">
 	    		<img height="50" class="d-absolute left-0"  src="{{asset('/img/p1.png')}}">
 	    		<img height="300" class="d-absolute"  src="{{asset('/img/s1-2.png')}}">
 	    		<img height="50" class="d-absolute right-0"  src="{{asset('/img/s2-2.png')}}">
-	    		Let your engineers <br> build the backend!
+	    		backend!
 	    	</div>
 
 	    	<div class="ThemePark-bannner text-center">
 	    		<img  src="{{asset('/img/ThemePark.jpg')}}">
 	    	</div>
-		    <div class="row justify-content-center">
+		    <div class="row justify-content-center d-none">
 		        <div class="my-5">
 		        	<p class="text-center">Need Help?</p>
 		        	<div class="card-body template-demo text-center">
