@@ -24,6 +24,13 @@
                     <a href="{{route('vendor')}}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Vendor')}}</span></a>
                 </div>
 
+                <div class="nav-item {{ ($segment1 == 'users') ? 'active' : '' }}">
+                    <a href="{{route('user')}}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Users')}}</span></a>
+                </div>
+
+                <div class="nav-item {{ ($segment1 == 'zone') ? 'active' : '' }}">
+                    <a href="{{route('zone')}}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Zone')}}</span></a>
+                </div>
                 {{-- <div class="nav-lavel">{{ __('Layouts')}} </div> --}}
                 {{-- <div class="nav-item {{ ($segment1 == 'pos') ? 'active' : '' }}">
                     <a href="{{url('inventory')}}"><i class="ik ik-shopping-cart"></i><span>{{ __('Inventory')}}</span> </a>

@@ -10,6 +10,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\ZoneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,7 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('/logout', [LoginController::class,'logout']);
 	Route::get('/clear-cache', [HomeController::class,'clearCache']);
 
+    // Route::group(['middleware' => 'can:manage_user'], function(){
 	// dashboard route
 	Route::get('/dashboard', function () {
 		return view('pages.dashboard');
@@ -52,18 +55,33 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/vendor/show/{id}', [VendorController::class,'show'])->name('vendor.show');
     Route::get('/vendor/destroy/{id}', [VendorController::class,'destroy'])->name('vendor.destroy');
 
+    Route::get('/user', [CustomersController::class,'index'])->name('user');
+    Route::get('/user/create', [CustomersController::class,'create'])->name('user.create');
+    Route::post('/user/store', [CustomersController::class,'store'])->name('user.store');
+    Route::get('/user/show/{id}', [CustomersController::class,'show'])->name('user.show');
+    Route::get('/user/destroy/{id}', [CustomersController::class,'destroy'])->name('user.destroy');
+
+    Route::get('/zone', [ZoneController::class,'index'])->name('zone');
+    Route::get('/zone/create', [ZoneController::class,'create'])->name('zone.create');
+    Route::post('/zone/store', [ZoneController::class,'store'])->name('zone.store');
+    Route::get('/zone/show/{id}', [ZoneController::class,'show'])->name('zone.show');
+    Route::get('/zone/destroy/{id}', [ZoneController::class,'destroy'])->name('zone.destroy');
+
+    // Route::resource('user', App\Http\Controllers\CustomersController::class);
+    // Route::resource('zone', App\Http\Controllers\ZoneController::class);
+    // });
     // Route::resources(['vendor' => VendorController::class]);
 
 	//only those have manage_user permission will get access
-	Route::group(['middleware' => 'can:manage_user'], function(){
-	Route::get('/users', [UserController::class,'index']);
-	Route::get('/user/get-list', [UserController::class,'getUserList']);
-		Route::get('/user/create', [UserController::class,'create']);
-		Route::post('/user/create', [UserController::class,'store'])->name('create-user');
-		Route::get('/user/{id}', [UserController::class,'edit']);
-		Route::post('/user/update', [UserController::class,'update']);
-		Route::get('/user/delete/{id}', [UserController::class,'delete']);
-	});
+	// Route::group(['middleware' => 'can:manage_user'], function(){
+	// Route::get('/users', [UserController::class,'index']);
+	// Route::get('/user/get-list', [UserController::class,'getUserList']);
+	// 	Route::get('/user/create', [UserController::class,'create']);
+	// 	Route::post('/user/create', [UserController::class,'store'])->name('create-user');
+	// 	Route::get('/user/{id}', [UserController::class,'edit']);
+	// 	Route::post('/user/update', [UserController::class,'update']);
+	// 	Route::get('/user/delete/{id}', [UserController::class,'delete']);
+	// });
 
 	//only those have manage_role permission will get access
 	Route::group(['middleware' => 'can:manage_role|manage_user'], function(){
