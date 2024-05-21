@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     vendor Information
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('vendor.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('vendor') }}" class="btn btn-primary btn-sm">&larr; Back</a>
                 </div>
             </div>
             <div class="card-body">
@@ -46,7 +46,7 @@
 
             </div>
 
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <div class="float-start">
                     Payment Details
                 </div>
@@ -78,7 +78,7 @@
                 <div class="col-md-6" style="line-height: 35px;">
                     {{ $VendorBank->branch ?? '-' }}
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ use App\Models\Vendor;
 use App\Http\Requests\StorevendorRequest;
 use App\Http\Requests\UpdatevendorRequest;
 use App\Models\VendorBank;
+use Illuminate\Http\Request;
 
 class VendorController extends Controller
 {
@@ -34,20 +35,20 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorevendorRequest $request)
+    public function store(Request $request)
     {
 
         $vendor = Vendor::create($request->all());
 
-        VendorBank::create([
-            'vendor_id' => $vendor->id,
-            'account_no' => $request->account_no,
-            'bank_name' => $request->bank_name,
-            'ifsc_code' => $request->ifsc_code,
-            'branch' => $request->branch
-        ]);
+        // VendorBank::create([
+        //     'vendor_id' => $vendor->id,
+        //     'account_no' => $request->account_no,
+        //     'bank_name' => $request->bank_name,
+        //     'ifsc_code' => $request->ifsc_code,
+        //     'branch' => $request->branch
+        // ]);
 
-        return redirect()->route('vendor.index')
+        return redirect()->route('vendor')
                 ->withSuccess('New vendor is added successfully.');
 
     }
@@ -55,12 +56,14 @@ class VendorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Vendor $vendor)
+    public function show(Vendor $vendor,$id)
     {
-        $VendorBank=VendorBank::where('vendor_id',$vendor->id)->first();
+        // $VendorBank=VendorBank::where('vendor_id',$vendor->id)->first();
+
+        $vendor=Vendor::find($id);
         return view('vendor.show', [
             'vendor' => $vendor,
-            'VendorBank'=>$VendorBank
+            // 'VendorBank'=>$VendorBank
         ]);
 
     }
@@ -84,10 +87,12 @@ class VendorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vendor $vendor)
+    public function destroy(Vendor $vendor,$id)
     {
-        $vendor->delete();
-        return redirect()->route('vendor.index')
+        // $vendor=Vendor::find($id);
+        Vendor::where('id',$id)->delete();
+        // $vendor->delete();
+        return redirect()->route('vendor')
                 ->withSuccess('vendor is deleted successfully.');
     }
 }

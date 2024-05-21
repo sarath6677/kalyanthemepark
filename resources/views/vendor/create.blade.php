@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
 
@@ -11,7 +11,7 @@
                     Add New Vendor
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('vendor.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('vendor') }}" class="btn btn-primary btn-sm">&larr; Back</a>
                 </div>
             </div>
             <div class="card-body">
@@ -49,6 +49,46 @@
                     </div>
 
                     <div class="mb-3 row">
+                        <label for="phone_no " class="col-md-4 col-form-label text-md-end text-start">Phone No</label>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control @error('phone_no ') is-invalid @enderror" id="phone_no" name="phone_no" value="{{ old('phone_no') }}">
+                            @if ($errors->has('phone_no '))
+                                <span class="text-danger">{{ $errors->first('phone_no ') }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="email" class="col-md-4 col-form-label text-md-end text-start">Email</label>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="gst_no" class="col-md-4 col-form-label text-md-end text-start">GST No</label>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control @error('gst_no') is-invalid @enderror" id="gst_no" name="gst_no" value="{{ old('gst_no') }}">
+                            @if ($errors->has('gst_no'))
+                                <span class="text-danger">{{ $errors->first('gst_no') }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="pan" class="col-md-4 col-form-label text-md-end text-start">PAN/TAN</label>
+                        <div class="col-md-6">
+                          <input type="text" class="form-control @error('pan') is-invalid @enderror" id="pan" name="pan" value="{{ old('pan') }}">
+                            @if ($errors->has('pan'))
+                                <span class="text-danger">{{ $errors->first('pan') }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
                         <label for="description" class="col-md-4 col-form-label text-md-end text-start">Description</label>
                         <div class="col-md-6">
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
@@ -60,7 +100,7 @@
 
                     <br>
 
-                    <h3>Payment Details</h3>
+                    {{-- <h3>Payment Details</h3>
 
                     <div class="mb-3 row">
                         <label for="account_no" class="col-md-4 col-form-label text-md-end text-start">Account No</label>
@@ -100,7 +140,7 @@
                                 <span class="text-danger">{{ $errors->first('branch') }}</span>
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="mb-3 row">
                         <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Add Vendor">
