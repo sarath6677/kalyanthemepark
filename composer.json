@@ -1,5 +1,5 @@
 {
-    "name": "themicly/ThemePark-laravel-starter-kit",
+    "name": "laravel/themepark",
     "type": "project",
     "description": "ThemePark is a premium template starter kit including REST API, Advanced user, roles & permission management , Serverside Datatable, Datatable Edit and Export( CSV, EXCEL, PRINT, PDF, COPY),Cache Clear, XSS protection and many more features. ",
     "keywords": [
