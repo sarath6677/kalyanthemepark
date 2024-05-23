@@ -69,6 +69,16 @@
                     </div>
 
                     <div class="mb-3 row">
+                        <label for="password" class="col-md-4 col-form-label text-md-end text-start">Password</label>
+                        <div class="col-md-6">
+                          <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" value="{{ old('password') }}">
+                            @if ($errors->has('password'))
+                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
                         <label for="gst_no" class="col-md-4 col-form-label text-md-end text-start">GST No</label>
                         <div class="col-md-6">
                           <input type="text" class="form-control @error('gst_no') is-invalid @enderror" id="gst_no" name="gst_no" value="{{ old('gst_no') }}">

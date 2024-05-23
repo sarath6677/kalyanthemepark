@@ -7,6 +7,8 @@ use App\Http\Requests\StorevendorRequest;
 use App\Http\Requests\UpdatevendorRequest;
 use App\Models\VendorBank;
 use Illuminate\Http\Request;
+use App\Models\User;
+use DB;
 
 class VendorController extends Controller
 {
@@ -39,6 +41,19 @@ class VendorController extends Controller
     {
 
         $vendor = Vendor::create($request->all());
+
+        $user = User::create([
+            'name'=> $request->vendor_name,
+            'email'=> $request->email,
+            'password'=> $request->password,
+        ]);
+
+        DB::table('model_has_roles')->insert(
+            [
+                'role_id' => 4,
+                'model_type' => 'App\\Models\\User',
+                'model_id' => $user->id,
+            ]);
 
         // VendorBank::create([
         //     'vendor_id' => $vendor->id,

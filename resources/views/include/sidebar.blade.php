@@ -20,6 +20,7 @@
                 <div class="nav-item {{ ($segment1 == 'dashboard') ? 'active' : '' }}">
                     <a href="{{route('dashboard')}}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Dashboard')}}</span></a>
                 </div>
+                @can('manage_user')
                 <div class="nav-item {{ ($segment1 == 'vendor') ? 'active' : '' }}">
                     <a href="{{route('vendor')}}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Vendor')}}</span></a>
                 </div>
@@ -31,6 +32,8 @@
                 <div class="nav-item {{ ($segment1 == 'zone') ? 'active' : '' }}">
                     <a href="{{route('zone')}}"><i class="ik ik-bar-chart-2"></i><span>{{ __('Zone')}}</span></a>
                 </div>
+                @endcan
+
                 {{-- <div class="nav-lavel">{{ __('Layouts')}} </div> --}}
                 {{-- <div class="nav-item {{ ($segment1 == 'pos') ? 'active' : '' }}">
                     <a href="{{url('inventory')}}"><i class="ik ik-shopping-cart"></i><span>{{ __('Inventory')}}</span> </a>
