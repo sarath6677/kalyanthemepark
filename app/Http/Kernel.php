@@ -2,6 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ActivationCheckMiddleware;
+use App\Http\Middleware\CheckDeviceId;
+use App\Http\Middleware\DeviceVerifyMiddleware;
+use App\Http\Middleware\InstallationMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -14,9 +18,10 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
         \Fruitcake\Cors\HandleCors::class,
-        \App\Http\Middleware\CheckForMaintenanceMode::class,
+        \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
@@ -39,6 +44,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
@@ -54,7 +60,6 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
@@ -62,5 +67,15 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'customerAuth' => \App\Http\Middleware\CustomerMiddleware::class,
+        'agentAuth' => \App\Http\Middleware\AgentMiddleware::class,
+        'trackLastActiveAt' => \App\Http\Middleware\TrackLastActiveAt::class,
+        'inactiveAuthCheck' => \App\Http\Middleware\InactiveAuthCheck::class,
+        'installation-check' => InstallationMiddleware::class,
+        'actch' => ActivationCheckMiddleware::class,
+        'deviceVerify' => DeviceVerifyMiddleware::class,
+        'checkDeviceId' => CheckDeviceId::class,
+        'vendor' => \App\Http\Middleware\MerchantMiddleware::class,
     ];
 }
