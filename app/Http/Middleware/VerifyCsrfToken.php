@@ -12,6 +12,16 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'get-token',
+        'create-payment',
+        'execute-payment',
+        'query-payment',
+        'success',
+        'fail',
+        'success',
+        'pay-paypal',
+        'paypal-status',
+        'paywithrazorpay',
+        'payment-razor'
     ];
 }
