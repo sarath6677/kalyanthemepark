@@ -42,45 +42,13 @@
     </div>
 </div>
 
-@include('layouts.landing.partials._header')
+{{-- @include('layouts.landing.partials._header') --}}
 
 <main class="main-content d-flex flex-column">
     @yield('content')
 </main>
 
-<section class="bg-white pt-5">
-    <div class="newsletter-area" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="p-4 p-sm-5 rounded-10"
-                         data-bg-img="{{asset('public/assets/landing/img/media/newsletter-bg.png')}}">
-                        <div
-                            class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 gap-md-5">
-                            <div class="d-flex flex-column gap-3">
-                                <h3 class="text-white">{{translate('Subscribe Newsletter')}}</h3>
-                                <p class="text-white">{{translate('get the latest')}} {{App\Models\BusinessSetting::where('key', 'business_name')->value('value') ?? '6cash'}} {{translate('offers delivered to your inbox')}}</p>
-                            </div>
-
-                            <form action="{{route('newsletter.subscribe')}}" method="POST"
-                                  class="newsletter-form flex-grow-1 mx-w w-22-rem">
-                                @csrf
-                                <div class="d-flex form-control px-1">
-                                    <input type="email" name="email"
-                                           class="border-0 px-2 text-dark bg-transparent w-100"
-                                           placeholder="Enter your email">
-                                    <button type="submit"
-                                            class="btn btn-secondary rounded px-3">{{translate('Submit')}}</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    @include('layouts.landing.partials._footer')
+    {{-- @include('layouts.landing.partials._footer') --}}
 </section>
 
 <div class="progress-wrap">
@@ -89,35 +57,6 @@
     </svg>
 </div>
 
-<aside class="aside d-flex flex-column d-xl-none">
-    <div class="aside-overlay"></div>
-    <div class="aside-header">
-        <div class="d-flex pb-3 justify-content-between">
-            <a href="index.html">
-                <img width="100"
-                     src="{{asset('storage/app/public/business') . '/' . \App\Models\BusinessSetting::where(['key' => 'landing_page_logo'])->first()->value}}"
-                     alt="">
-            </a>
-            <button class="aside-close-btn border-0 bg-transparent">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
-    </div>
-    <div class="aside-body custom-scrollbar">
-        <ul class="main-nav nav">
-            <li><a class="{{Request::is('/') ? 'active' : ''}}"
-                   href="{{route('landing-page-home')}}">{{translate('Home')}}</a></li>
-            <li><a class="{{Request::is('pages/privacy-policy') ? 'active' : ''}}"
-                   href="{{route('pages.privacy-policy')}}">{{translate('Privacy Policy')}}</a></li>
-            <li><a class="{{Request::is('pages/terms-conditions') ? 'active' : ''}}"
-                   href="{{route('pages.terms-conditions')}}">{{translate('Terms & Condition')}}</a></li>
-            <li><a class="{{Request::is('pages/about-us') ? 'active' : ''}}"
-                   href="{{route('pages.about-us')}}">{{translate('About Us')}}</a></li>
-            <li><a class="{{Request::is('contact-us') ? 'active' : ''}}"
-                   href="{{route('contact-us')}}">{{translate('Contact Us')}}</a></li>
-        </ul>
-    </div>
-</aside>
 
 <script src="{{asset('public/assets/landing/js/jquery-3.6.0.min.js')}}"></script>
 <script src="{{asset('public/assets/landing/js/bootstrap.bundle.min.js')}}"></script>
