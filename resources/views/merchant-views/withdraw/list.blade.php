@@ -123,7 +123,7 @@
                             <td>
                                 @if($withdrawRequest->user)
                                     <small class="badge badge-pill">
-                                        {{ $withdrawRequest->user->type == 1 ? translate('Agent') : ($withdrawRequest->user->type == 3 ? translate('Merchant') : translate('Customer')) }}
+                                        {{ $withdrawRequest->user->type == 3 ? translate('Agent') : ($withdrawRequest->user->type == 1 ? translate('Merchant') : translate('Customer')) }}
                                     </small>
                                 @else
                                     <span class="badge badge-pill">{{translate('Not_available')}}</span>

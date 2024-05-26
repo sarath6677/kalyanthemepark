@@ -19,8 +19,12 @@ class LandingPageController extends Controller
     {
     }
 
-    public function landingPageHome(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function landingPageHome()
     {
+
+        return redirect(route('admin.auth.login'));
+
+
         $screenshotsData = $this->businessSetting->where('key', 'screenshots')->first();
         $whyChooseUsData = $this->businessSetting->where('key', 'why_choose_us')->first();
         $featureData = $this->businessSetting->where('key', 'feature')->first();
