@@ -1805,4 +1805,5 @@
   'Account Number' => 'Account Number',
   'Account Holder Name' => 'Account Holder Name',
   'Vendor Added Failed!' => 'Vendor Added Failed!',
+  'Vendor Added Successfully!' => 'Vendor Added Successfully!',
 );

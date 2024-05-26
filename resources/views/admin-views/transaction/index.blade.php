@@ -73,7 +73,7 @@
 
                             <tbody>
                             @forelse($transactions as $key=>$transaction)
-                                @php($route = [0 => 'admin', 1 => 'agent', 2 => 'customer', 3 => 'merchant'])
+                                @php($route = [0 => 'admin', 1 => 'vebdor', 2 => 'customer'])
 
                                 <tr>
                                     <td>{{$transactions->firstitem()+$key}}</td>

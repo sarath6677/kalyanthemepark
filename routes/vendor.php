@@ -7,7 +7,7 @@ use App\Http\Controllers\Merchant\TransactionController;
 use App\Http\Controllers\Merchant\WithdrawController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'Vendor', 'as' => 'vendor.'], function () {
+Route::group(['namespace' => 'Merchant', 'as' => 'vendor.'], function () {
 
     Route::group(['namespace' => 'Auth', 'prefix' => 'auth', 'as' => 'auth.'], function () {
         Route::get('/code/captcha/{tmp}', 'LoginController@captcha')->name('default-captcha');

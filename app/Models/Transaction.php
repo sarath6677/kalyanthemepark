@@ -89,7 +89,7 @@ class Transaction extends Model
     public function scopeMerchant($query): mixed
     {
         return $query->whereHas('user', function ($q) {
-            $q->where('type', 3);
+            $q->where('type', 1);
         });
     }
 
