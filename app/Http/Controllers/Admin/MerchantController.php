@@ -78,6 +78,8 @@ class MerchantController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+
         $request->validate([
             'f_name' => 'required',
             'l_name' => 'required',
@@ -169,15 +171,19 @@ class MerchantController extends Controller
             $emoney->user_id = $user->id;
             $emoney->save();
 
-            $vendorBank = $this->vendorBankDetails;
-            $vendorBank->vendor_id = $user->id;
-            $vendorBank->acc_holder_name = $request->acc_holder_name;
-            $vendorBank->account_number = $request->account_number;
-            $vendorBank->bank_name = $request->bank_name;
-            $vendorBank->ifsc_code = $request->ifsc_code;
-            $vendorBank->branch = $request->branch;
-            $vendorBank->save();
+            // $vendorBank = new VendorBankDetails();
+            // $vendorBank->vendor_id = $user->id;
+            // $vendorBank->acc_holder_name = $request->acc_holder_name;
+            // $vendorBank->account_number = $request->account_number;
+            // $vendorBank->bank_name = $request->bank_name;
+            // $vendorBank->ifsc_code = $request->ifsc_code;
+            // $vendorBank->branch = $request->branch;
+            // $vendorBank->save();
 
+
+            // echo "<pre>";
+            // print_r($vendorBank);
+            // exit();
             DB::commit();
 
             Toastr::success(translate('Vendor Added Successfully!'));
