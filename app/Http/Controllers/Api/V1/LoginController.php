@@ -82,10 +82,10 @@ class LoginController extends Controller
             return response()->json(response_formatter($response, null, null), 403);
         }
 
-        $logStatus = self::logUserHistory($request, $user->id);
-        if(!$logStatus) {
-            return response()->json(response_formatter(AUTH_LOGIN_400, null, Helpers::error_processor($validator)), 400);
-        }
+        // $logStatus = self::logUserHistory($request, $user->id);
+        // if(!$logStatus) {
+        //     return response()->json(response_formatter(AUTH_LOGIN_400, null, Helpers::error_processor($validator)), 400);
+        // }
 
         $user->update(['last_active_at' => now()]);
         $user->AauthAcessToken()->delete();
