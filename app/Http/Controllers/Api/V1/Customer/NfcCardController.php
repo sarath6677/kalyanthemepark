@@ -44,8 +44,8 @@ class NfcCardController extends Controller
 
         $cardData = NfcCard::where('card_id', $request->card_id)->get();
         if($cardData->isNotEmpty()){
-            $cardData = $cardData->where('user_id','<>',$request->user()->id)->get();
-            if ($cardData->isEmpty()) {
+            $cardDatas = $cardData->where('user_id','<>',$request->user()->id)->get();
+            if ($cardDatas->isEmpty()) {
                 return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
             }
         }
@@ -74,8 +74,8 @@ class NfcCardController extends Controller
 
         $cardData = NfcCard::where('card_id', $request->card_id)->get();
         if($cardData->isNotEmpty()){
-            $cardData = $cardData->where('user_id','<>',$request->user()->id)->get();
-            if ($cardData->isEmpty()) {
+            $cardDatas = $cardData->where('user_id','<>',$request->user()->id)->get();
+            if ($cardDatas->isEmpty()) {
                 return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
             }
         }
