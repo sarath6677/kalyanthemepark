@@ -21,7 +21,7 @@ class NfcCardController extends Controller
      */
     public function getCardMoney()
     {
-        $card = NfcCard::find('user_id',$request->user()->id);
+        $card = NfcCard::find('user_id',auth()->user()->id);
 
         return response()->json(['success' => true, 'balance' => $card->balance], 200);
     }
