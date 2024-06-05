@@ -24,6 +24,9 @@ trait TransactionTrait
     {
         return DB::transaction(function () use ($from_user_id, $amount, $credit ,$note) {
             /** From user's(customer) debit */
+            $emoney = EMoney::where('user_id', $from_user_id)->first();
+            $emoney->current_balance += $amount;
+            $emoney->save();
 
             $primary_transaction = Transaction::create([
                 'user_id' => $from_user_id,
@@ -31,7 +34,7 @@ trait TransactionTrait
                 'transaction_type' => ADD_MONEY,
                 'debit' => 0,
                 'credit' => $amount,
-                'balance' => $amount,
+                'balance' => $emoney->current_balance,
                 'from_user_id' => $from_user_id,
                 'to_user_id' => Null,
                 'note' => null,
@@ -44,8 +47,12 @@ trait TransactionTrait
 
     public function customer_deduct_nfc_money_transaction($from_user_id, $to_user_id, $amount, $debit, $note = null)
     {
-        return DB::transaction(function () use ($from_user_id, $to_user_id, $amount , $balance, $note) {
+        return DB::transaction(function () use ($from_user_id, $to_user_id, $amount , $debit, $note) {
             /** From user's(customer) debit */
+
+            $emoney = EMoney::where('user_id', $from_user_id)->first();
+            $emoney->current_balance -= $debit;
+            $emoney->save();
 
             $primary_transaction = Transaction::create([
                 'user_id' => $from_user_id,
@@ -53,7 +60,7 @@ trait TransactionTrait
                 'transaction_type' => DEDUCT_MONEY,
                 'debit' => $debit,
                 'credit' => 0,
-                'balance' => $amount,
+                'balance' => $emoney->current_balance,
                 'from_user_id' => $from_user_id,
                 'to_user_id' => $to_user_id,
                 'note' => null,
