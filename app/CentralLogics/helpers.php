@@ -217,13 +217,13 @@ class helpers
 
     public static function currency_code()
     {
-        $currency_code = BusinessSetting::where(['key' => 'currency'])->first()->value??'USD';
+        $currency_code = BusinessSetting::where(['key' => 'currency'])->first()->value?? 'INR';
         return $currency_code;
     }
 
     public static function currency_symbol()
     {
-        $currency_symbol = Currency::where(['currency_code' => Helpers::currency_code()])->first()->currency_symbol ?? '$';
+        $currency_symbol = Currency::where(['currency_code' => Helpers::currency_code()])->first()->currency_symbol ?? '₹';
         return $currency_symbol;
     }
 
