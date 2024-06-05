@@ -22,7 +22,7 @@ trait TransactionTrait
 
     public function customer_add_nfc_money_transaction($from_user_id, $amount, $credit, $note = null)
     {
-        return DB::transaction(function () use ($from_user_id, $to_user_id, $amount, $credit ,$note) {
+        return DB::transaction(function () use ($from_user_id, $amount, $credit ,$note) {
             /** From user's(customer) debit */
 
             $primary_transaction = Transaction::create([
