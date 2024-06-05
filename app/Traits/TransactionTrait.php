@@ -33,7 +33,7 @@ trait TransactionTrait
                 'ref_trans_id' => null, //since primary
                 'transaction_type' => ADD_MONEY,
                 'debit' => 0,
-                'credit' => $amount,
+                'credit' => $credit,
                 'balance' => $emoney->current_balance,
                 'from_user_id' => $from_user_id,
                 'to_user_id' => Null,
