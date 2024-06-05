@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Customer;
 
 use App\Models\NfcCard;
+use App\CentralLogics\helpers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Traits\TransactionTrait;
