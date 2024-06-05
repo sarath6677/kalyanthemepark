@@ -22,8 +22,13 @@ class NfcCardController extends Controller
     public function getCardMoney()
     {
         $card = NfcCard::where('user_id',auth()->user()->id)->first();
+        if($card){
+            $balance = $card->balance;
+        }else{
+            $balance = 0;
+        }
 
-        return response()->json(['success' => true, 'balance' => $card->balance], 200);
+        return response()->json(['success' => true, 'balance' => $balance], 200);
     }
 
     public function addMoney(Request $request)
@@ -35,6 +40,11 @@ class NfcCardController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)], 403);
+        }
+
+        $cardData = NfcCard::where('card_id', $request->card_id)->get();
+        if ($cardData->isNotsEmpty()) {
+            return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
         }
 
         $card = NfcCard::firstOrCreate(['card_id' => $request->card_id], ['user_id' => $request->user()->id]);
@@ -57,6 +67,11 @@ class NfcCardController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['errors' => Helpers::error_processor($validator)], 403);
+        }
+
+        $cardData = NfcCard::where('card_id', $request->card_id)->get();
+        if ($cardData->isNotsEmpty()) {
+            return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
         }
 
         $card = NfcCard::where('card_id', $request->card_id)->first();
