@@ -33,7 +33,7 @@ trait TransactionTrait
                 'credit' => $amount,
                 'balance' => $amount,
                 'from_user_id' => $from_user_id,
-                'to_user_id' => '',
+                'to_user_id' => Null,
                 'note' => null,
                 'transaction_id' => Str::random(5) . Carbon::now()->timestamp,
             ]);
