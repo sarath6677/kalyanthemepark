@@ -50,7 +50,7 @@ Route::group(['namespace' => 'Api\V1'], function () {
                 Route::get('get-purpose', [CustomerAuthController::class, 'getPurpose']);
                 Route::get('get-banner', [BannerController::class, 'getCustomerBanner']);
                 Route::get('linked-website', [CustomerAuthController::class, 'linkedWebsite']);
-                Route::post('nfc-money', [NfcCardController::class, 'getCardMoney']);
+                Route::get('nfc-money', [NfcCardController::class, 'getCardMoney']);
                 Route::post('nfc-add-money', [NfcCardController::class, 'addMoney']);
                 Route::post('nfc-deduct-money', [NfcCardController::class, 'deductMoney']);
                 Route::get('get-notification', [NotificationController::class, 'getCustomerNotification']);
