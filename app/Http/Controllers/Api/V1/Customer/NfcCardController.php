@@ -43,8 +43,11 @@ class NfcCardController extends Controller
         }
 
         $cardData = NfcCard::where('card_id', $request->card_id)->get();
-        if ($cardData->where('user_id','<>',$request->user()->id)) {
-            return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
+        if($cardData->isNotEmpty()){
+            $cardData = $cardData->where('user_id','<>',$request->user()->id)->get();
+            if ($cardData->isEmpty()) {
+                return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
+            }
         }
 
         $card = NfcCard::firstOrCreate(['card_id' => $request->card_id], ['user_id' => $request->user()->id]);
@@ -70,9 +73,13 @@ class NfcCardController extends Controller
         }
 
         $cardData = NfcCard::where('card_id', $request->card_id)->get();
-        if ($cardData->where('user_id','<>',$request->user()->id)) {
-            return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
+        if($cardData->isNotEmpty()){
+            $cardData = $cardData->where('user_id','<>',$request->user()->id)->get();
+            if ($cardData->isEmpty()) {
+                return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
+            }
         }
+
 
         $card = NfcCard::where('card_id', $request->card_id)->first();
         if (!$card || $card->balance < $request->amount) {
