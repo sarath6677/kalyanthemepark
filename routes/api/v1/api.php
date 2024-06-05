@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\BannerController;
 use App\Http\Controllers\Api\V1\ConfigController;
 use App\Http\Controllers\Api\V1\Customer\Auth\CustomerAuthController;
 use App\Http\Controllers\Api\V1\Customer\TransactionController;
+use App\Http\Controllers\Api\V1\Customer\NfcCardController;
 use App\Http\Controllers\Api\V1\GeneralController;
 use App\Http\Controllers\Api\V1\LoginController;
 use App\Http\Controllers\Api\V1\NotificationController;
@@ -49,6 +50,9 @@ Route::group(['namespace' => 'Api\V1'], function () {
                 Route::get('get-purpose', [CustomerAuthController::class, 'getPurpose']);
                 Route::get('get-banner', [BannerController::class, 'getCustomerBanner']);
                 Route::get('linked-website', [CustomerAuthController::class, 'linkedWebsite']);
+                Route::post('nfc-Money', [NfcCardController::class, 'getCardMoney']);
+                Route::post('nfc-add-Money', [NfcCardController::class, 'addMoney']);
+                Route::post('nfc-deduct-Money', [NfcCardController::class, 'deductMoney']);
                 Route::get('get-notification', [NotificationController::class, 'getCustomerNotification']);
                 Route::get('get-requested-money', [CustomerAuthController::class, 'getRequestedMoney']);
                 Route::get('get-own-requested-money', [CustomerAuthController::class, 'getOwnRequestedMoney']);

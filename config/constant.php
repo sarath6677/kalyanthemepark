@@ -7,6 +7,7 @@ const MERCHANT_TYPE = 1;
 
 //transaction type
 const ADD_MONEY = 'add_money';
+const DEDUCT_MONEY = 'deduct_money';
 const ADD_MONEY_BONUS = 'add_money_bonus';
 const RECEIVED_MONEY = 'received_money';
 const SEND_MONEY = 'send_money';

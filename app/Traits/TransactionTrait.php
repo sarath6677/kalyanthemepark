@@ -20,6 +20,67 @@ trait TransactionTrait
     }
 
 
+    public function customer_add_nfc_money_transaction($from_user_id, $amount, $credit, $note = null)
+    {
+        return DB::transaction(function () use ($from_user_id, $to_user_id, $amount, $credit ,$note) {
+            /** From user's(customer) debit */
+
+            $primary_transaction = Transaction::create([
+                'user_id' => $from_user_id,
+                'ref_trans_id' => null, //since primary
+                'transaction_type' => ADD_MONEY,
+                'debit' => 0,
+                'credit' => $amount,
+                'balance' => $amount,
+                'from_user_id' => $from_user_id,
+                'to_user_id' => '',
+                'note' => null,
+                'transaction_id' => Str::random(5) . Carbon::now()->timestamp,
+            ]);
+
+            return $primary_transaction->transaction_id ?? null;
+        });
+    }
+
+    public function customer_deduct_nfc_money_transaction($from_user_id, $to_user_id, $amount, $debit, $note = null)
+    {
+        return DB::transaction(function () use ($from_user_id, $to_user_id, $amount , $balance, $note) {
+            /** From user's(customer) debit */
+
+            $primary_transaction = Transaction::create([
+                'user_id' => $from_user_id,
+                'ref_trans_id' => null, //since primary
+                'transaction_type' => DEDUCT_MONEY,
+                'debit' => $debit,
+                'credit' => 0,
+                'balance' => $amount,
+                'from_user_id' => $from_user_id,
+                'to_user_id' => $to_user_id,
+                'note' => null,
+                'transaction_id' => Str::random(5) . Carbon::now()->timestamp,
+            ]);
+
+            $emoney = EMoney::where('user_id', $to_user_id)->first();
+            $emoney->current_balance += $debit;
+            $emoney->save();
+
+            Transaction::create([
+                'user_id' => $to_user_id,
+                'ref_trans_id' => $primary_transaction->transaction_id,
+                'transaction_type' => RECEIVED_MONEY,
+                'debit' => 0,
+                'credit' => $debit,
+                'balance' => $emoney->current_balance,
+                'from_user_id' => $from_user_id,
+                'to_user_id' => $to_user_id,
+                'note' => $note,
+                'transaction_id' => Str::random(5) . Carbon::now()->timestamp,
+            ]);
+
+            return $primary_transaction->transaction_id ?? null;
+        });
+    }
+
     /**
      * Customer with Customer
      * Sender [ -($amount+$send_money_charge) ]
