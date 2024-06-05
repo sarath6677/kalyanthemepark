@@ -25,7 +25,7 @@ trait TransactionTrait
         return DB::transaction(function () use ($from_user_id, $amount, $credit ,$note) {
             /** From user's(customer) debit */
             $emoney = EMoney::where('user_id', $from_user_id)->first();
-            $emoney->current_balance += $amount;
+            $emoney->current_balance += $credit;
             $emoney->save();
 
             $primary_transaction = Transaction::create([
