@@ -49,12 +49,17 @@ class NfcCardController extends Controller
                 return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
             }
         }
+        $totalAmount = $request->amount;
+        if(isset($request->nfcAddMoney) && $request->nfcAddMoney == 'yes'){
+            $nfcAddMoney = NfcAddMoney::find($request->nfcAddMoneyId);
+            $totalAmount = $nfcAddMoney->amount + $nfcAddMoney->cashback_amount;
+        }
 
         $card = NfcCard::firstOrCreate(['card_id' => $request->card_id], ['user_id' => $request->user()->id]);
-        $card->balance += $request->amount;
+        $card->balance += $totalAmount;
         $card->save();
 
-        $customerTransaction = $this->customer_add_nfc_money_transaction($request->user()->id, $card->balance ,$request->amount);
+        $customerTransaction = $this->customer_add_nfc_money_transaction($request->user()->id, $card->balance ,$totalAmount);
 
         if (is_null($customerTransaction)) return response()->json(['message' => translate('fail')], 501);
 
@@ -94,5 +99,12 @@ class NfcCardController extends Controller
         if (is_null($customerTransaction)) return response()->json(['message' => translate('fail')], 501);
 
         return response()->json(['success' => true, 'balance' => $card->balance], 200);
+    }
+
+    public function getRechargeMoneyList()
+    {
+        $nfcAddMoney = NfcAddMoney::get();
+
+        return response()->json(['success' => true, 'nfcAddMoney' => $nfcAddMoney], 200);
     }
 }

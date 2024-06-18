@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\MerchantController;
+use App\Http\Controllers\Admin\NfcRechargeController;
 use App\Http\Controllers\Admin\TransferController;
 use App\Http\Controllers\Admin\WithdrawController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -129,13 +130,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('transaction-limits/{transaction_type}', [BusinessSettingsController::class, 'transactionLimitsUpdate'])->name('transaction_limits_update');
         });
 
-        Route::group(['prefix' => 'addon', 'as' => 'addon.'], function () {
-            Route::get('/', [SystemAddonController::class, 'index'])->name('index');
-            Route::post('publish', [SystemAddonController::class, 'publish'])->name('publish');
-            Route::post('activation', [SystemAddonController::class, 'activation'])->name('activation');
-            Route::post('upload', [SystemAddonController::class, 'upload'])->name('upload');
-            Route::post('delete', [SystemAddonController::class, 'deleteAddon'])->name('delete');
-        });
 
         Route::group(['prefix' => 'merchant-config', 'as' => 'merchant-config.'], function () {
             Route::get('merchant-payment-otp', [BusinessSettingsController::class, 'merchantPaymentOtpIndex'])->name('merchant-payment-otp');
@@ -221,8 +215,21 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::post('update/{id}', [MerchantController::class, 'update'])->name('update');
             Route::post('search', [MerchantController::class, 'search'])->name('search');
             Route::get('status/{id}', [MerchantController::class, 'status'])->name('status');
-
         });
+
+        Route::group(['prefix' => 'recharge', 'as' => 'recharge.'], function () {
+            Route::get('add', [NfcRechargeController::class, 'index'])->name('add');
+            Route::post('store', [NfcRechargeController::class, 'store'])->name('store');
+            Route::get('list', [NfcRechargeController::class, 'list'])->name('list');
+
+
+            Route::get('addMobileAmount', [NfcAddMoneyController::class, 'mobileIndex'])->name('add-mobile');
+            Route::get('addMobileAmount', [NfcAddMoneyController::class, 'mobileIndex'])->name('add-mobile');
+            Route::post('storeMobileAmount', [NfcAddMoneyController::class, 'mobileStore'])->name('store-mobile');
+            Route::get('listMobileAmount', [NfcAddMoneyController::class, 'mobileList'])->name('list-mobile');
+        });
+
+        Route::resource('add-money', NfcAddMoneyController::class);
 
         Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
             Route::get('log', [UserController::class, 'log'])->name('log');

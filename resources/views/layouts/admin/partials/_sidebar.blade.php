@@ -111,6 +111,38 @@
                     </li>
 
 
+                    <li class="navbar-vertical-aside-has-menu {{Request::is('admin/recharge*')?'active':''}}">
+                        <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:"
+                        >
+                            <i class="tio-group-senior nav-icon"></i>
+                            <span
+                                class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">{{translate('recharge')}}</span>
+                        </a>
+                        <ul class="js-navbar-vertical-aside-submenu nav nav-sub" style="display: {{Request::is('admin/recharge*')?'block':'none'}}">
+                            {{-- <li class="navbar-vertical-aside-has-menu {{Request::is('admin/recharge/add')?'active':''}}">
+                                <a class="nav-link " href="{{route('admin.recharge.add')}}"
+                                   title="{{translate('add')}}">
+                                    <span class="tio-circle nav-indicator-icon"></span>
+                                    <span class="text-truncate">{{translate('Recharge')}}</span>
+                                </a>
+                            </li> --}}
+                            <li class="navbar-vertical-aside-has-menu {{Request::is('admin/recharge/list')?'active':''}}">
+                                <a class="nav-link " href="{{route('admin.recharge.list')}}"
+                                   title="{{translate('list')}}">
+                                    <span class="tio-circle nav-indicator-icon"></span>
+                                    <span class="text-truncate">{{translate('Recharge')}}</span>
+                                </a>
+                            </li>
+                            <li class="navbar-vertical-aside-has-menu {{Request::is('admin/add-money')?'active':''}}">
+                                <a class="nav-link " href="{{route('admin.add-money.index')}}"
+                                   title="{{translate('list')}}">
+                                    <span class="tio-circle nav-indicator-icon"></span>
+                                    <span class="text-truncate">{{translate('Add Money')}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
 
                     <li class="nav-item">
                         <small class="nav-subtitle"
