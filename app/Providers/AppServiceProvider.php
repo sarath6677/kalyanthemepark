@@ -2,24 +2,40 @@
 
 namespace App\Providers;
 
+use App\Traits\ActivationClass;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
+use App\Traits\AddonHelper;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
+    use ActivationClass, AddonHelper;
     /**
      * Register any application services.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         //
     }
 
     /**
      * Bootstrap any application services.
+     *
      */
-    public function boot(): void
+    public function boot()
     {
         Schema::defaultStringLength(191);
+
+        Paginator::useBootstrap();
+
+        Config::set('addon_admin_routes',$this->get_addon_admin_routes());
+
+        return 0;
     }
 }
