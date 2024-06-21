@@ -221,12 +221,6 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.'], function () {
             Route::get('add', [NfcRechargeController::class, 'index'])->name('add');
             Route::post('store', [NfcRechargeController::class, 'store'])->name('store');
             Route::get('list', [NfcRechargeController::class, 'list'])->name('list');
-
-
-            Route::get('addMobileAmount', [NfcAddMoneyController::class, 'mobileIndex'])->name('add-mobile');
-            Route::get('addMobileAmount', [NfcAddMoneyController::class, 'mobileIndex'])->name('add-mobile');
-            Route::post('storeMobileAmount', [NfcAddMoneyController::class, 'mobileStore'])->name('store-mobile');
-            Route::get('listMobileAmount', [NfcAddMoneyController::class, 'mobileList'])->name('list-mobile');
         });
 
         Route::resource('add-money', NfcAddMoneyController::class);
