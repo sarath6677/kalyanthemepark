@@ -44,7 +44,7 @@ class NfcCardController extends Controller
 
         $cardData = NfcCard::where('card_id', $request->card_id)->get();
         if($cardData->isNotEmpty()){
-            $cardDatas = $cardData->where('user_id','<>',$request->user()->id)->get();
+            $cardDatas = $cardData->where('user_id','<>',auth()->user()->id)->get();
             if ($cardDatas->isEmpty()) {
                 return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
             }
@@ -55,11 +55,11 @@ class NfcCardController extends Controller
             $totalAmount = $nfcAddMoney->amount + $nfcAddMoney->cashback_amount;
         }
 
-        $card = NfcCard::firstOrCreate(['card_id' => $request->card_id], ['user_id' => $request->user()->id]);
+        $card = NfcCard::firstOrCreate(['card_id' => $request->card_id], ['user_id' => auth()->user()->id]);
         $card->balance += $totalAmount;
         $card->save();
 
-        $customerTransaction = $this->customer_add_nfc_money_transaction($request->user()->id, $card->balance ,$totalAmount);
+        $customerTransaction = $this->customer_add_nfc_money_transaction(auth()->user()->id, $card->balance ,$totalAmount);
 
         if (is_null($customerTransaction)) return response()->json(['message' => translate('fail')], 501);
 
@@ -79,7 +79,7 @@ class NfcCardController extends Controller
 
         $cardData = NfcCard::where('card_id', $request->card_id)->get();
         if($cardData->isNotEmpty()){
-            $cardDatas = $cardData->where('user_id','<>',$request->user()->id)->get();
+            $cardDatas = $cardData->where('user_id','<>',auth()->user()->id)->get();
             if ($cardDatas->isEmpty()) {
                 return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
             }
@@ -94,7 +94,7 @@ class NfcCardController extends Controller
         $card->balance -= $request->amount;
         $card->save();
 
-        $customerTransaction = $this->customer_deduct_nfc_money_transaction($request->user()->id, 11 , $card->balance ,$request->amount);
+        $customerTransaction = $this->customer_deduct_nfc_money_transaction(auth()->user()->id, 11 , $card->balance ,$request->amount);
 
         if (is_null($customerTransaction)) return response()->json(['message' => translate('fail')], 501);
 
