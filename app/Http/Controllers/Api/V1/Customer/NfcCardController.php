@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Customer;
 
 use App\Models\NfcCard;
+use App\Models\NfcAddMoney;
 use App\CentralLogics\helpers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -44,7 +45,9 @@ class NfcCardController extends Controller
 
         $cardData = NfcCard::where('card_id', $request->card_id)->get();
         if($cardData->isNotEmpty()){
-            $cardDatas = $cardData->where('user_id','<>',auth()->user()->id)->get();
+            $cardDatas = $cardData->filter(function ($card) {
+                return $card->user_id == auth()->user()->id;
+            });
             if ($cardDatas->isEmpty()) {
                 return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
             }
@@ -79,7 +82,9 @@ class NfcCardController extends Controller
 
         $cardData = NfcCard::where('card_id', $request->card_id)->get();
         if($cardData->isNotEmpty()){
-            $cardDatas = $cardData->where('user_id','<>',auth()->user()->id)->get();
+            $cardDatas = $cardData->filter(function ($card) {
+                return $card->user_id == auth()->user()->id;
+            });
             if ($cardDatas->isEmpty()) {
                 return response()->json(['success' => false, 'message' => 'user already used this card'], 400);
             }
