@@ -19,13 +19,34 @@
             </div>
 
             <div class="navbar-vertical-content search-bar-merchant">
+
                 <ul class="navbar-nav navbar-nav-lg nav-tabs">
-                    <li class="navbar-vertical-aside-has-menu {{Request::is('vendor')?'show':''}}">
+                    <li class="navbar-vertical-aside-has-menu {{Request::is('merchant')?'show':''}}">
                         <a class="js-navbar-vertical-aside-menu-link nav-link"
                            href="{{route('vendor.dashboard')}}" title="{{translate('dashboard')}}">
                             <i class="tio-home-vs-1-outlined nav-icon"></i>
                             <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
                                 {{translate('dashboard')}}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="navbar-vertical-aside-has-menu {{Request::is('merchant/transaction')?'show':''}}">
+                        <a class="js-navbar-vertical-aside-menu-link nav-link"
+                           href="{{route('vendor.transaction', ['trx_type'=>'all'])}}"
+                           title="{{translate('dashboard')}}">
+                            <i class="tio-money-vs nav-icon"></i>
+                            <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                {{translate('transaction')}}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="navbar-vertical-aside-has-menu {{Request::is('merchant/product')?'show':''}}">
+                        <a class="js-navbar-vertical-aside-menu-link nav-link"
+                           href="{{route('vendor.products.index')}}"
+                           title="{{translate('products')}}">
+                            <i class="tio-money-vs nav-icon"></i>
+                            <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                {{translate('Products')}}
                             </span>
                         </a>
                     </li>

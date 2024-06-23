@@ -67,10 +67,10 @@ class LoginController extends Controller
         $request->validate([
             'phone' => 'required|min:8|max:20',
             'password' => 'required|min:8',
-            'country_code' => 'required',
+            // 'country_code' => 'required',
         ]);
 
-        $phone = $request->country_code . $request->phone;
+        $phone = '+91' . $request->phone;
 
         if (auth('user')->attempt(['phone' => $phone, 'password' => $request->password, 'type' => 1], $request->remember)) {
 

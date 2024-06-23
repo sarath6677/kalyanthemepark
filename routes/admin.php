@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\MerchantController;
 use App\Http\Controllers\Admin\NfcRechargeController;
+use App\Http\Controllers\Admin\NfcAddMoneyController;
 use App\Http\Controllers\Admin\TransferController;
 use App\Http\Controllers\Admin\WithdrawController;
 use App\Http\Controllers\Admin\DashboardController;

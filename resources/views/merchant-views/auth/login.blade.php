@@ -61,7 +61,7 @@
 
                             <div class="js-form-message form-group merchant-login-form-group">
                                 <select id="country_code" name="country_code"
-                                        class="form-control __form-control __form-control-select" required>
+                                        class="form-control __form-control __form-control-select d-none" required>
                                     <option value="">{{ translate('country code') }}</option>
                                     @foreach(PHONE_CODE as $country_code)
                                         <option

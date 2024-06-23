@@ -5,6 +5,7 @@ use App\Http\Controllers\Merchant\DashboardController;
 use App\Http\Controllers\Merchant\BusinessSettingsController;
 use App\Http\Controllers\Merchant\TransactionController;
 use App\Http\Controllers\Merchant\WithdrawController;
+use App\Http\Controllers\Merchant\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Merchant', 'as' => 'vendor.'], function () {
@@ -39,7 +40,7 @@ Route::group(['namespace' => 'Merchant', 'as' => 'vendor.'], function () {
             Route::get('download', [WithdrawController::class, 'download'])->name('download');
         });
 
-
+        Route::resource('products',ProductsController::class);
     });
 
 });
