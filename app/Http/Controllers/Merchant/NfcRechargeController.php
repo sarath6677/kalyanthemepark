@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Merchant;
 
 use App\Models\NfcRecharge;
 use App\CentralLogics\helpers;
 use App\Models\User;
 use App\Models\EMoney;
 use App\Models\NfcCard;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Traits\TransactionTrait;
 use App\Http\Controllers\Controller;
@@ -24,7 +25,8 @@ class NfcRechargeController extends Controller
     public function __construct(
         private User           $user,
         private NfcRecharge           $nfcRecharge,
-        private EMoney         $eMoney
+        private EMoney         $eMoney,
+        private Products    $Products
     )
     {
     }
@@ -35,9 +37,9 @@ class NfcRechargeController extends Controller
      */
     public function index()
     {
-        $customers = $this->user->where(['type' => CUSTOMER_TYPE])->get();
+        $products = $this->Products->where('vendor_id',auth()->user()->id)->get();
 
-        return view('admin-views.recharge.index', compact('customers'));
+        return view('merchant-views.recharge.index', compact('products'));
     }
 
         /**
@@ -64,7 +66,7 @@ class NfcRechargeController extends Controller
         }
 
         $nfcRecharges = $nfcRecharges->with('user')->latest()->paginate(Helpers::pagination_limit())->appends($queryParam);
-        return view('admin-views.recharge.list', compact('nfcRecharges', 'search'));
+        return view('merchant-views.recharge.list', compact('nfcRecharges', 'search'));
     }
 
     /**
@@ -86,23 +88,28 @@ class NfcRechargeController extends Controller
                 return back();
             }
 
+            if (!empty($card) && $card->balance < $request->amount) {
+                Toastr::warning('Insufficient balance -'.$card->balance);
+                return back();
+            }
+
         DB::transaction(function () use ($request) {
             $card = NfcCard::where('card_id', $request->card_id)->first();
-            $card->balance += $request->amount;
+            $card->balance -= $request->amount;
             $card->save();
 
-            $nfcRecharge = $this->nfcRecharge;
-            $nfcRecharge->user_id = $card->user_id;
-            $nfcRecharge->card_id = $card->card_id;
-            $nfcRecharge->amount = $request->amount;
-            $nfcRecharge->save();
-
-            $this->customer_add_nfc_money_transaction($card->user_id, $card->balance ,$request->amount);
+            $this->customer_deduct_nfc_money_transaction($card->user_id, auth()->user()->id , $card->balance ,$request->amount);
 
         });
 
-        Toastr::success(translate('Recharge Added Successfully!'));
-        return redirect(route('admin.recharge.list'));
+        Toastr::success(translate('Money Deducted Successfully!'));
+        return redirect(route('vendor.recharge.list'));
+    }
+
+    public function getProduct($pId){
+        $products = $this->Products->where('id',$pId)->first();
+
+        return $products->price;
     }
     /**
      * Show the form for creating a new resource.

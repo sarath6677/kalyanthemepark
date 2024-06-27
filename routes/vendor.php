@@ -6,6 +6,7 @@ use App\Http\Controllers\Merchant\BusinessSettingsController;
 use App\Http\Controllers\Merchant\TransactionController;
 use App\Http\Controllers\Merchant\WithdrawController;
 use App\Http\Controllers\Merchant\ProductsController;
+use App\Http\Controllers\Merchant\NfcRechargeController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Merchant', 'as' => 'vendor.'], function () {
@@ -38,6 +39,13 @@ Route::group(['namespace' => 'Merchant', 'as' => 'vendor.'], function () {
             Route::post('/request-store', [WithdrawController::class, 'withdrawRequestStore'])->name('request-store');
             Route::get('/method-data', [WithdrawController::class, 'withdrawMethod'])->name('method-data');
             Route::get('download', [WithdrawController::class, 'download'])->name('download');
+        });
+
+        Route::group(['prefix' => 'recharge', 'as' => 'recharge.'], function () {
+            Route::get('add', [NfcRechargeController::class, 'index'])->name('add');
+            Route::post('store', [NfcRechargeController::class, 'store'])->name('store');
+            // Route::get('list', [NfcRechargeController::class, 'list'])->name('list');
+            Route::get('getProduct/{pId}', [NfcRechargeController::class, 'getProduct'])->name('getProduct');
         });
 
         Route::resource('products',ProductsController::class);

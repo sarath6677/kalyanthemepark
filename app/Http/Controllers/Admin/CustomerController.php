@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\EMoney;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\NfcCard;
 use App\Models\UserLogHistory;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\Foundation\Application;
@@ -26,7 +27,8 @@ class CustomerController extends Controller
         private User           $user,
         private UserLogHistory $userLogHistory,
         private EMoney         $eMoney,
-        private Transaction    $transaction
+        private Transaction    $transaction,
+        private NfcCard        $nfcCard
     )
     {
     }
@@ -99,6 +101,11 @@ class CustomerController extends Controller
             $emoney = $this->eMoney;
             $emoney->user_id = $user->id;
             $emoney->save();
+
+            $nfcCard = $this->nfcCard;
+            $nfcCard->card_id = $request->card_id;
+            $nfcCard->user_id = $user->id;
+            $nfcCard->save();
         });
 
         Toastr::success(translate('Customer Added Successfully!'));

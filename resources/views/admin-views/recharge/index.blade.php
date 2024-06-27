@@ -15,15 +15,9 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-4">
                         <div class="form-group">
-                            <label class="input-label" for="exampleFormControlInput1">{{translate('Customer')}}</label>
-                            <select name="customer_id" class="form-control">
-                                <option value="" readonly selected disabled>-- Select Customer --</option>
-                                @forelse ($customers as $customer)
-                                    <option value="{{ $customer->id }}">{{ $customer->f_name.' '.$customer->l_name }}</option>
-                                @empty
-                                    <option value="passport">No data found</option>
-                                @endforelse
-                               </select>
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('RFID Card Number')}}</label>
+                            <input type="text" name="card_id" class="form-control" value="{{ old('card_id') }}"
+                                    placeholder="{{translate('Please Tap a Card')}}" required>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-4">

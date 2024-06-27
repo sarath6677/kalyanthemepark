@@ -1831,4 +1831,12 @@
   'Add Products Money' => 'Add Products Money',
   'Product Added Successfully!' => 'Product Added Successfully!',
   'Add New Products List' => 'Add New Products List',
+  'RFID Card Number' => 'RFID Card Number',
+  'PLease Tap Card' => 'PLease Tap Card',
+  'Add Mobile Money' => 'Add Mobile Money',
+  'Please Tap a Card' => 'Please Tap a Card',
+  'Game Play' => 'Game Play',
+  'Deduct Money for Game Play' => 'Deduct Money for Game Play',
+  'Select Product' => 'Select Product',
+  'deduct_money' => 'Deduct money',
 );

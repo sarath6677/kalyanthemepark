@@ -50,6 +50,18 @@
                             </span>
                         </a>
                     </li>
+
+
+                    <li class="navbar-vertical-aside-has-menu {{Request::is('merchant/recharge/ad')?'show':''}}">
+                        <a class="js-navbar-vertical-aside-menu-link nav-link"
+                           href="{{route('vendor.recharge.add')}}"
+                           title="{{translate('Game Play')}}">
+                            <i class="tio-money-vs nav-icon"></i>
+                            <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">
+                                {{translate('Game Play')}}
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -86,6 +86,14 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="input-label">{{translate('RFID Card Number')}}</label>
+                            <input type="text" name="card_id" class="form-control" value="{{ old('RFID Card Number') }}"
+                                    placeholder="Tap a card" required>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group mt-4">
