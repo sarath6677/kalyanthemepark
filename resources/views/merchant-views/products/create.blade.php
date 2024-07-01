@@ -31,9 +31,9 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-4">
                         <div class="form-group">
-                            <label class="input-label" for="exampleFormControlInput1">{{translate('RFID Card Reader ID')}}</label>
+                            <label class="input-label" for="exampleFormControlInput1">{{translate('Card Reader ID')}}</label>
                             <input type="text" name="rfid_tag" id="rfid_tag" class="form-control" value="{{ old('rfid_tag') }}"
-                                    placeholder="{{translate('RFID Card Reader ID')}}" required>
+                                    placeholder="{{translate('Card Reader ID')}}" required>
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-4">
