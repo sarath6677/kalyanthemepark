@@ -103,7 +103,7 @@ class NfcRechargeController extends Controller
         });
 
         Toastr::success(translate('Money Deducted Successfully!'));
-        return redirect(route('vendor.recharge.index'));
+        return redirect(route('vendor.recharge.add'));
     }
 
     public function getProduct($pId){
